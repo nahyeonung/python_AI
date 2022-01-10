@@ -36,10 +36,10 @@ plt.xlabel('x')
 
 plt.ylabel('y')
 
-data_points = df.values
-kmeans = KMeans(n_clusters=3).fit(data_points)
+data_points = df.values #values라는 함수를 사용함으로써 numpy형태의 array로 변경
+kmeans = KMeans(n_clusters=3).fit(data_points) #3개의 클러스터(집합) 으로 나눠줌.
 kmeans.labels_
-kmeans.cluster_centers_
+kmeans.cluster_centers_ #각 클러스터의 센터들의 값을 보여줌.
 df['cluster_id'] = kmeans.labels_
 print(df.head(20))
 
