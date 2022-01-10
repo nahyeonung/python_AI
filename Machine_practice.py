@@ -38,3 +38,14 @@ plt.ylabel('y')
 
 data_points = df.values
 kmeans = KMeans(n_clusters=3).fit(data_points)
+kmeans.labels_
+kmeans.cluster_centers_
+df['cluster_id'] = kmeans.labels_
+print(df.head(20))
+
+sns.lmplot('x','y', data=df, fit_reg=False, # x-axis, y-axis, data, no line
+                    scatter_kws={"s": 150}, # marker size
+                    hue="cluster_id")
+#title
+plt.title('after kmean clustering')
+plt.show()
