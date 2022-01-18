@@ -18,10 +18,10 @@ def check(test, train, train_labels):
 
 def get_result(file_name):
     image = cv2.imread(file_name)
-    chars = utils.extract_chars(image)
+    chars = utils.extract_chars(image) #순서대로 정렬해놓는 함수를 여기서 들고옴
     result_string = ""
     for char in chars:
-        matched = check(utils.resize20(char[1]), train, train_labels)
+        matched = check(utils.resize20(char[1]), train, train_labels) #knn으로 학습한 내용을 여기서 사용.
         if matched < 10:
             result_string += str(int(matched))
             continue
