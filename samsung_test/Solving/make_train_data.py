@@ -9,6 +9,7 @@ for char in chars:
     input = cv2.waitKey(0)
     resized = cv2.resize(char[1], (20, 20))
     
+    #사용자가 직접 레이블링(분류)를 하는 부분.
     if input >= 48 and input <= 57:
             name = str(input - 48)
             file_count = len(next(os.walk('./training_data/' + name + '/'))[2])

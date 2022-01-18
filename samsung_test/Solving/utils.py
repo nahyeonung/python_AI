@@ -34,9 +34,11 @@ def get_chars(image, color):
 def extract_chars(image):
     chars = []
     colors = [BLUE, GREEN, RED]
+    #대충 thresholding으로 흑백화된 그림의 한계점을 나타내고 그 한계점을 이용해서 contour하면 원본 이미지에서 그 한계점을 선으로 그림.
+    #contour: 동일한 색 또는 동일한 색상 강도를 가진 부분의 가장자리 경계를 연결한 선.
     for color in colors:
-        image_from_one_color = get_chars(image.copy(), color)
-        image_gray = cv2.cvtColor(image_from_one_color, cv2.COLOR_BGR2GRAY)
+        image_from_one_color = get_chars(image.copy(), color) # 색깔별로 값들이 여기에 담길 것 같다.
+        image_gray = cv2.cvtColor(image_from_one_color, cv2.COLOR_BGR2GRAY) #색깔별로 담긴 것을 여기서 흑백화.
         ret, thresh = cv2.threshold(image_gray, 127, 255, 0) #(img, threshold_value, value, flag)
         #RETR_EXTERNAL 옵션으로 숫자의 외각을 기준으로 분리
         contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -49,8 +51,8 @@ def extract_chars(image):
                 roi = image_gray[y:y + height, x:x + width]
                 chars.append((x, roi))
 
-
-    chars = sorted(chars, key=lambda char: char[0])
+    #람다식은 그냥 단순한 수학 식. char[0]이면 리스트의 0번째 값들을 기준(x축을 기준)으로 정렬.(그래야 왼쪽->오른쪽으로 정렬됨)
+    chars = sorted(chars, key=lambda char: char[0]) #sorted(iterable, key=<function>, reverse=<True|False>)
     return chars
 
     # 특정한 이미지를 (20x20) 크기로 Scaling 한다.
