@@ -22,5 +22,6 @@ train_labels = np.array(train_labels)[:, np.newaxis]
 
 print(train.shape)
 print(train_labels.shape)
+print(train_labels)
 
 np.savez("trained.npz", train=train, train_labels=train_labels)

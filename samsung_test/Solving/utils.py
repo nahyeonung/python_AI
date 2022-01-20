@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import re
 #색에 대해서 알아야 할 것.
 #파란색: RGB에서 B 값이 항상 FF(255)입니다.
 #초록색: RGB에서 G 값이 항상 FF(255)입니다.
@@ -59,3 +60,23 @@ def extract_chars(image):
 def resize20(image):
     resized = cv2.resize(image, (20,20))
     return resized.reshape(-1,400).astype(np.float32)
+
+def remove_firest_0(string): #불필요한 0을 제거하는 함수
+    temp = []
+    for i in string:
+        if i == '+' or i == '-' or i == '*':
+            temp.append(i)
+    split = re.split('\*|\+|-', string)
+    i = 0
+    temp_count = 0
+    result = ""
+    for a in split:
+        a = a.lstrip('0')
+        if a == '':
+            a = '0'
+        result += a
+        if i < len(split) - 1:
+            result += temp[temp_count]
+            temp_count = temp_count + 1
+        i = i + 1
+    return result        

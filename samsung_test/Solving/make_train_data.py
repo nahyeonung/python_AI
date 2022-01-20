@@ -2,7 +2,7 @@ import os
 import cv2
 import utils
 # training_data 폴더 생성 및 그 내부에 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 폴더 생성
-image = cv2.imread("1.png")
+image = cv2.imread("3.png")
 chars = utils.extract_chars(image)
 for char in chars:
     cv2.imshow('Image', char[1])
